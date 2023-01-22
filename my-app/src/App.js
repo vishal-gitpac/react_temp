@@ -1,10 +1,15 @@
 import { useState } from "react";
 import "./App.css";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+//import { createBrowserHistory } from "history";
 //react elements should be declare with capital letter in the starting
 //import data from "./data";
 import { Faq } from "./components/Faq";
 import { RqFaq } from "./components/RQFaq";
+import { Login } from "./components/login";
+import { Signup } from "./components/signup";
+import { User } from "./components/User";
+
 //import { Navbar } from "./navbar";
 let cnt = 1;
 function App() {
@@ -30,66 +35,104 @@ function App() {
       addtask();
     }
   }
+  //const [isLoggedIn, setIsLoggedIn] = useState(false);
+  //const history = createBrowserHistory();
   return (
     <div>
-      <div className="header1">my portfolio</div>
-      <div className="comp">
-        <BrowserRouter>
-          <Link to="/">Home</Link>
+      <BrowserRouter>
+        <div className="comp">
           <Routes>
             <Route
               path="/"
+              exact
               element={
-                <div className="whole">
-                  <div className="headers">
-                    <h1 className="header">TO DO LIST</h1>
+                <ran>
+                  <div className="header2">
+                    <div className="header1">my portfolio</div>
+                    <div>
+                      <Link to="/login">
+                        <button className="login">login</button>
+                      </Link>
+                      <Link to="/signup">
+                        <button className="login">signup</button>
+                      </Link>
+                    </div>
                   </div>
-                  <input
-                    onKeyDown={addwhenenter}
-                    type="text"
-                    //value attribute of input tag in react works only with usestate or else they stay static with defaulot value given
-                    value={task}
-                    onChange={(event) => {
-                      settask(event.target.value);
-                    }}
-                    className="input-task"
-                  />
-                  <button onClick={addtask}>add</button>
-                  <div className="todo-cont">
-                    <ul className="list">
-                      {todo
-                        ? todo.map((dt) => {
-                            return (
-                              <div className="todo-container" key={dt.id}>
-                                <div className="todo">
-                                  <div className="task">
-                                    <input type="checkbox" />
-                                    {dt.sub}
+                  <Link to="/">Home</Link>
+                  <div className="whole">
+                    <div className="headers">
+                      <h1 className="header">TO DO LIST</h1>
+                    </div>
+                    <input
+                      onKeyDown={addwhenenter}
+                      type="text"
+                      //value attribute of input tag in react works only with usestate or else they stay static with defaulot value given
+                      value={task}
+                      onChange={(event) => {
+                        settask(event.target.value);
+                      }}
+                      className="input-task"
+                    />
+                    <button onClick={addtask}>add</button>
+                    <div className="todo-cont">
+                      <ul className="list">
+                        {todo
+                          ? todo.map((dt) => {
+                              return (
+                                <div className="todo-container" key={dt.id}>
+                                  <div className="todo">
+                                    <div className="task">
+                                      <input type="checkbox" />
+                                      {dt.sub}
+                                    </div>
+                                    <button
+                                      onClick={() => deltask(dt.id)}
+                                      className="rm-btn"
+                                    >
+                                      remove
+                                    </button>
                                   </div>
-                                  <button
-                                    onClick={() => deltask(dt.id)}
-                                    className="rm-btn"
-                                  >
-                                    remove
-                                  </button>
                                 </div>
-                              </div>
-                            );
-                          })
-                        : "loading"}
-                    </ul>
+                              );
+                            })
+                          : "loading"}
+                      </ul>
+                    </div>
                   </div>
-                </div>
+                </ran>
               }
             />
           </Routes>
-          <div className="FAQ">
-            <Link to="/faq">
-              <h1>FAQ</h1>
-            </Link>
-            <Link to="/rqfaq">
-              <h1>RQFAQ</h1>
-            </Link>
+          <Routes>
+            <Route
+              path="/login"
+              element={
+                <div>
+                  <Login />
+                </div>
+              }
+              exact
+            />
+            <Route
+              path="/signup"
+              element={
+                <div>
+                  <Signup />
+                </div>
+              }
+              exact
+            />
+            <Route
+              path="/user"
+              element={
+                <div>
+                  <User />
+                </div>
+              }
+              exact
+            />
+          </Routes>
+          <div>
             <Routes>
               <Route
                 path="/faq"
@@ -116,12 +159,20 @@ function App() {
                 exact
               />
             </Routes>
+            <div className="FAQ">
+              <Link to="/faq">
+                <h1>FAQ</h1>
+              </Link>
+              <Link to="/rqfaq">
+                <h1>RQFAQ</h1>
+              </Link>
+            </div>
           </div>
-        </BrowserRouter>
-        <div className="footer">
-          <p>About me , </p>I am Vishal, studying at iiitdm kancheepuram
+          <div className="footer">
+            <p>About me , </p>I am Vishal, studying at iiitdm kancheepuram
+          </div>
         </div>
-      </div>
+      </BrowserRouter>
     </div>
   );
 }

@@ -22,7 +22,7 @@ export const RqFaq = () => {
   return (
     <div>
       {data?.data.map((f) => {
-        return <Ques id={f.id} title={f.title} info={f.info} />;
+        return <Ques key={f.id} id={f.id} title={f.title} info={f.info} />;
       })}
     </div>
   );

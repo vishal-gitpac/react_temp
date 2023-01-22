@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Ques from "../question";
 export const Faq = () => {
   const [Loading, SetLoading] = useState(true);
@@ -13,9 +14,7 @@ export const Faq = () => {
     if (!text.ok) {
       throw new Error(text.statusText);
     }
-    console.log("hi");
     const data = await text.json();
-    console.log("hi");
     Setdata(data);
     SetLoading(false);
   };
@@ -24,10 +23,17 @@ export const Faq = () => {
   }
   return (
     <div>
-      Faq Page
-      {data.map((q) => {
-        return <Ques id={q.id} title={q.title} info={q.info} />;
-      })}
+      <div className="header2">
+        <div className="header1">my portfolio</div>
+      </div>
+      <div className="FAQ">
+        <Link to="/">Home</Link>
+        <br></br>
+        Faq Page
+        {data.map((q) => {
+          return <Ques key={q.id} id={q.id} title={q.title} info={q.info} />;
+        })}
+      </div>
     </div>
   );
 };

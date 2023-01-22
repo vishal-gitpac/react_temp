@@ -1,11 +1,47 @@
-.header1 {
-  padding: 20px;
+.header2 {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  background-color: #1e3f66;
   font-size: 20px;
   font-style: oblique;
   font-weight: 500;
   color: rgb(255, 255, 255);
-  padding-left: 60px;
-  background-color: #1e3f66;
+}
+.login {
+  margin-right: 15px;
+}
+.login-page {
+  margin-top: 100px;
+}
+.login-box {
+  margin: auto;
+  background-color: rgb(255, 255, 255);
+  width: fit-content;
+  border-radius: 20px;
+  border: 1px solid#999;
+  padding-top: 10px;
+  padding-right: 20px;
+  padding-bottom: 10px;
+}
+.username-txt {
+  margin-right: 20px;
+}
+.username {
+  padding-top: 10px;
+  padding-left: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.lgn-btn {
+  margin-top: 30px;
+  margin-left: 100px;
+}
+.header1 {
+  padding: 20px;
+  padding-left: 40px;
 }
 .comp {
   background-color: #bcd2e8;

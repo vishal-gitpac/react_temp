@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 const routesHandler = require("./routes/handler.js");
+const userRoutes = require("./routes/user/index");
 
 const app = express();
 
@@ -10,7 +11,7 @@ var cors = require("cors");
 app.use(cors());
 
 mongoose.connect(
-  "mongodb://vishal:vishal@ac-smjg2hl-shard-00-00.yds4a4n.mongodb.net:27017,ac-smjg2hl-shard-00-01.yds4a4n.mongodb.net:27017,ac-smjg2hl-shard-00-02.yds4a4n.mongodb.net:27017/newdb?ssl=true&replicaSet=atlas-a304q7-shard-0&authSource=admin&retryWrites=true&w=majority",
+  "mongodb+srv://vishal:vishal@atlascluster.b57m3rw.mongodb.net/newdb?retryWrites=true&w=majority",
   { useNewUrlParser: true, useUnifiedTopology: true },
   (err, client) => {
     if (err) {
@@ -24,7 +25,7 @@ mongoose.connect(
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use("/api", routesHandler);
-
+app.use("/", userRoutes);
 app.listen(5000, () => {
   console.log("server is up");
 });
