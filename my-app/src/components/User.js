@@ -1,19 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import axios from "axios";
 
 let cnt = 1;
 export const User = () => {
-  const [todo, settodo] = useState([{ sub: "maths", id: 0 }]);
+  const [todo, settodo] = useState([{ completed: false, sub: "maths", id: 0 }]);
   const [task, settask] = useState("");
   function addtask() {
     settodo((oldtodo) => {
       //runs synchronously so task does not become empty before adding to todo
       settask("");
-      return [...oldtodo, { sub: task, id: cnt++ }];
+      return [...oldtodo, { completed: false, sub: task, id: cnt++ }];
     });
     //...includes all old elements of oldtodo
     //whenever the new otuput depends on input it is better to use function as value
+  }
+  function updatetask(pa) {
+    const newtodo = todo.map((b) => {
+      if (b.id === pa) {
+        return { ...b, completed: !b.completed };
+      }
+      return b;
+    });
+    settodo(newtodo);
   }
   function deltask(pa) {
     const newtodo = todo.filter((b) => b.id !== pa);
@@ -27,11 +36,48 @@ export const User = () => {
     }
   }
   const [username, setusername] = useState("");
+  const [isLoggedOut, setIsLoggedOut] = useState(false);
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    await axios
+      .get("http://localhost:5000/logout/")
+      //res is converted to res.json
+      .then((res) => {
+        localStorage.removeItem("token");
+        console.log(res);
+        setIsLoggedOut(true);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const SaveList = async (event) => {
+    event.preventDefault();
+    const token = localStorage.getItem("token");
+    await axios
+      .post(
+        "http://localhost:5000/todos/save/",
+        {
+          todolist: todo,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log(token);
+    //console.log(token);
     axios
-      .get("http://localhost:5000/auth", {
+      .get("http://localhost:5000/auth/" + token, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -43,6 +89,19 @@ export const User = () => {
       .catch((error) => {
         console.log(error);
       });
+    axios
+      .get("http://localhost:5000/todos/get/", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        settodo(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }, []);
   return (
     <div>
@@ -50,11 +109,16 @@ export const User = () => {
         <div className="header1">my portfolio</div>
         <div>
           {username}
-          <button>logout</button>
+          {isLoggedOut ? (
+            <Navigate to="/" />
+          ) : (
+            <button className="lgt-btn" onClick={handleSubmit}>
+              logout
+            </button>
+          )}
         </div>
       </div>
       <div className="comp">
-        <Link to="/">Home</Link>
         <div className="whole">
           <div className="headers">
             <h1 className="header">TO DO LIST</h1>
@@ -78,7 +142,11 @@ export const User = () => {
                       <div className="todo-container" key={dt.id}>
                         <div className="todo">
                           <div className="task">
-                            <input type="checkbox" />
+                            <input
+                              onChange={() => updatetask(dt.id)}
+                              type="checkbox"
+                              checked={dt.completed}
+                            />
                             {dt.sub}
                           </div>
                           <button
@@ -93,9 +161,12 @@ export const User = () => {
                   })
                 : "loading"}
             </ul>
+            <button onClick={SaveList} className="save-btn">
+              save
+            </button>
           </div>
         </div>
-        <div className="FAQ">
+        {/*<div className="FAQ">
           <Link to="/faq">
             <h1>FAQ</h1>
           </Link>
@@ -105,7 +176,7 @@ export const User = () => {
         </div>
         <div className="footer">
           <p>About me , </p>I am Vishal, studying at iiitdm kancheepuram
-        </div>
+        </div>*/}
       </div>
     </div>
   );

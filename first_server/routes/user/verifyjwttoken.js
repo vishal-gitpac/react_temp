@@ -9,7 +9,7 @@ function verifyJWT(req, res, next) {
     jwt.verify(token, "secret", (err, decoded) => {
       if (err) {
         res.status(403).send("invalid credentials");
-        console.log(err);
+        //console.log(err);
       } else {
         //decoded contains username
         req.username = decoded.username;

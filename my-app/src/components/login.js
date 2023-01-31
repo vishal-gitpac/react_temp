@@ -2,22 +2,25 @@ import React, { useState } from "react";
 import axios from "axios";
 
 export const Login = () => {
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    axios
-      .post("http://localhost:5000/", {
+    await axios
+      .post("http://localhost:5000/login/", {
         username: username,
         password: password,
       })
-      .then((response) => response.data)
-      .then((data) => {
-        setResponse(data);
+      .then((res) => {
+        console.log(res);
+        if (res.status === 200) {
+          localStorage.setItem("token", res.data.token);
+          window.location.href = "/user/" + res.data.token;
+        }
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  const [response, setResponse] = useState("");
+  //const [response, setResponse] = useState("");
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();
   return (
@@ -48,7 +51,6 @@ export const Login = () => {
               />
             </label>
             <br />
-            <div>{response}</div>
             <button type="submit" onClick={handleSubmit} className="lgn-btn">
               login
             </button>

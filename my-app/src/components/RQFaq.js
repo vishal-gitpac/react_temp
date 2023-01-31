@@ -21,9 +21,14 @@ export const RqFaq = () => {
   }
   return (
     <div>
-      {data?.data.map((f) => {
-        return <Ques key={f.id} id={f.id} title={f.title} info={f.info} />;
-      })}
+      <div className="header2">
+        <div className="header1">my portfolio</div>
+      </div>
+      <div className="FAQ">
+        {data?.data.map((f) => {
+          return <Ques key={f.id} id={f.id} title={f.title} info={f.info} />;
+        })}
+      </div>
     </div>
   );
 };

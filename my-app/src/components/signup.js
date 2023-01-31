@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 
 export const Signup = () => {
   const [jwtToken, setJwtToken] = useState(null);
   let token;
+  let loc = "/user/" + jwtToken;
   const handleSubmit = async (event) => {
     event.preventDefault();
     await axios
@@ -19,6 +21,7 @@ export const Signup = () => {
         setJwtToken(token);
         console.log(token);
         localStorage.setItem("token", token);
+        //history.push("/user");
       })
       .catch((error) => {
         console.log(error);
@@ -60,7 +63,7 @@ export const Signup = () => {
             <button type="submit" onClick={handleSubmit} className="lgn-btn">
               signup
             </button>
-            <Link to="/user">home</Link>
+            {jwtToken && <Navigate to={loc} />}
           </form>
         </div>
       </div>

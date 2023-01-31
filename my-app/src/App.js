@@ -13,6 +13,11 @@ import { User } from "./components/User";
 //import { Navbar } from "./navbar";
 let cnt = 1;
 function App() {
+  //const token = match.params.token;
+  //let loc = "/user" + token;
+  //console.log(token);
+  //const [jwtToken, setJwtToken] = useState(null);
+  //setJwtToken(token);
   const [todo, settodo] = useState([{ sub: "maths", id: 0 }]);
   const [task, settask] = useState("");
   function addtask() {
@@ -123,7 +128,7 @@ function App() {
               exact
             />
             <Route
-              path="/user"
+              path={"/user/:token"}
               element={
                 <div>
                   <User />
