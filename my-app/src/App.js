@@ -1,6 +1,7 @@
 import { useState } from "react";
 import "./App.css";
 import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import img from "./18891613_1693623057317945_3168262290184170435_o.jpeg";
 //import { createBrowserHistory } from "history";
 //react elements should be declare with capital letter in the starting
 //import data from "./data";
@@ -51,9 +52,9 @@ function App() {
               path="/"
               exact
               element={
-                <ran>
+                <div>
                   <div className="header2">
-                    <div className="header1">my portfolio</div>
+                    <div className="header1">TDP SURVEY</div>
                     <div>
                       <Link to="/login">
                         <button className="login">login</button>
@@ -63,48 +64,9 @@ function App() {
                       </Link>
                     </div>
                   </div>
-                  <Link to="/">Home</Link>
-                  <div className="whole">
-                    <div className="headers">
-                      <h1 className="header">TO DO LIST</h1>
-                    </div>
-                    <input
-                      onKeyDown={addwhenenter}
-                      type="text"
-                      //value attribute of input tag in react works only with usestate or else they stay static with defaulot value given
-                      value={task}
-                      onChange={(event) => {
-                        settask(event.target.value);
-                      }}
-                      className="input-task"
-                    />
-                    <button onClick={addtask}>add</button>
-                    <div className="todo-cont">
-                      <ul className="list">
-                        {todo
-                          ? todo.map((dt) => {
-                              return (
-                                <div className="todo-container" key={dt.id}>
-                                  <div className="todo">
-                                    <div className="task">
-                                      <input type="checkbox" />
-                                      {dt.sub}
-                                    </div>
-                                    <button
-                                      onClick={() => deltask(dt.id)}
-                                      className="rm-btn"
-                                    >
-                                      remove
-                                    </button>
-                                  </div>
-                                </div>
-                              );
-                            })
-                          : "loading"}
-                      </ul>
-                    </div>
-                  </div>
-                </ran>
+                  <div className="background"></div>
+                  <img src={img} width="1500" height="800" />
+                </div>
               }
             />
           </Routes>
@@ -137,44 +99,8 @@ function App() {
               exact
             />
           </Routes>
-          <div>
-            <Routes>
-              <Route
-                path="/faq"
-                element={
-                  // {data.map((ar) => {
-                  //     return <Ques title={ar.title} key={ar.id} info={ar.info} />;
-                  //   })}
-                  <div>
-                    <Faq />
-                  </div>
-                }
-                exact
-              />
-              <Route
-                path="/rqfaq"
-                element={
-                  // {data.map((ar) => {
-                  //     return <Ques title={ar.title} key={ar.id} info={ar.info} />;
-                  //   })}
-                  <div>
-                    <RqFaq />
-                  </div>
-                }
-                exact
-              />
-            </Routes>
-            <div className="FAQ">
-              <Link to="/faq">
-                <h1>FAQ</h1>
-              </Link>
-              <Link to="/rqfaq">
-                <h1>RQFAQ</h1>
-              </Link>
-            </div>
-          </div>
           <div className="footer">
-            <p>About me , </p>I am Vishal, studying at iiitdm kancheepuram
+            <p>About website , </p>
           </div>
         </div>
       </BrowserRouter>

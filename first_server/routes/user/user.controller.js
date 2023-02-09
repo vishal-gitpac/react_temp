@@ -103,7 +103,7 @@ exports.save = (req, res) => {
           .then(res.json({ message: "saved" }))
           .catch((error) => res.status(500).send(error));
         console.log(todo);
-        return res.json({ message: "saved" });
+        //return res.json({ message: "saved" });
       } else {
         user.items = req.body.todolist;
         user.save();

@@ -118,11 +118,12 @@ export const User = () => {
           )}
         </div>
       </div>
-      <div className="comp">
-        <div className="whole">
-          <div className="headers">
-            <h1 className="header">TO DO LIST</h1>
-          </div>
+      <div className="whole">
+        <div className="headers">
+          <h1 className="header">SURVEY FORM</h1>
+        </div>
+        <div className="sub">
+          <div className="side-line">Mobile number</div>
           <input
             onKeyDown={addwhenenter}
             type="text"
@@ -133,50 +134,38 @@ export const User = () => {
             }}
             className="input-task"
           />
-          <button onClick={addtask}>add</button>
-          <div className="todo-cont">
-            <ul className="list">
-              {todo
-                ? todo.map((dt) => {
-                    return (
-                      <div className="todo-container" key={dt.id}>
-                        <div className="todo">
-                          <div className="task">
-                            <input
-                              onChange={() => updatetask(dt.id)}
-                              type="checkbox"
-                              checked={dt.completed}
-                            />
-                            {dt.sub}
-                          </div>
-                          <button
-                            onClick={() => deltask(dt.id)}
-                            className="rm-btn"
-                          >
-                            remove
-                          </button>
-                        </div>
-                      </div>
-                    );
-                  })
-                : "loading"}
-            </ul>
-            <button onClick={SaveList} className="save-btn">
-              save
-            </button>
-          </div>
+          <button onClick={addtask} className="otp-btn">
+            Send OTP
+          </button>
         </div>
-        {/*<div className="FAQ">
-          <Link to="/faq">
-            <h1>FAQ</h1>
-          </Link>
-          <Link to="/rqfaq">
-            <h1>RQFAQ</h1>
-          </Link>
+        <div className="gender-head">Gender : </div>
+        <div className="gender">
+          <input
+            type="checkbox"
+            className="input-task"
+            placeholder="Enter OTP"
+          />
+          <div>Male</div>
         </div>
-        <div className="footer">
-          <p>About me , </p>I am Vishal, studying at iiitdm kancheepuram
-        </div>*/}
+        <div className="gender">
+          <input
+            type="checkbox"
+            className="input-task"
+            placeholder="Enter OTP"
+          />
+          <div>Female</div>
+        </div>
+        <div className="gender-head">
+          PC :
+          <input type="text" className="PC-box" />
+        </div>
+        <div className="gender-head">
+          AC :
+          <input type="text" className="PC-box" />
+        </div>
+        <div className="gender-head"> More details</div>
+        <div className="gender-head"> More details</div>
+        <div className="gender-head"> More details</div>
       </div>
     </div>
   );

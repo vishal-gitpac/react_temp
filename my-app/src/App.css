@@ -1,3 +1,31 @@
+.sub {
+  display: flex;
+  margin-left: 260px;
+  margin-bottom: 1.5%;
+}
+.input-task {
+  margin-left: 6%;
+}
+.side-line {
+  margin-right: 2%;
+}
+.otp-btn {
+  padding-top: 0%;
+  padding-bottom: 0%;
+  margin-left: 2%;
+}
+.gender-head {
+  margin-left: 260px;
+  margin-bottom: 2%;
+}
+.gender {
+  display: flex;
+  margin-left: 380px;
+  margin-bottom: 2%;
+}
+.PC-box {
+  margin-left: 15%;
+}
 .header2 {
   display: flex;
   justify-content: space-between;
@@ -24,6 +52,7 @@
   padding-top: 10px;
   padding-right: 20px;
   padding-bottom: 10px;
+  margin-bottom: 200px;
 }
 .lgt-btn {
   margin-left: 10px;
@@ -51,7 +80,6 @@
   background-color: #bcd2e8;
 }
 .whole {
-  text-align: center;
   background-color: #bcd2e8;
   /*margin: 3%;
   padding-top: 1%;
@@ -68,14 +96,6 @@
   border-radius: 10px;
   width: max-content;
   padding: 10px;
-}
-.input-task {
-  padding-left: 1%;
-  padding-top: 0.5%;
-  padding-bottom: 0.5%;
-  border-radius: 10px;
-  margin-right: 2%;
-  margin-bottom: 2%;
 }
 .todo-cont {
   margin: auto;
@@ -132,7 +152,7 @@
   clear: both;
   position: relative;
   height: 200px;
-  margin-top: 150px;
+  /*margin-top: 150px;*/
   width: 100%;
   height: 120px;
   padding: 20px;
